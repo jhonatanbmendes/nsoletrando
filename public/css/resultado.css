@@ -1,0 +1,48 @@
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 10px 0;
+}
+
+#emoji{
+    width: 150px;
+    display: block;
+    margin: auto;
+}
+
+.texto{
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+}
+.palavra{
+    font-size: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 15px 0;
+}
+
+#botao a{
+    display: block;
+    margin: auto;
+    width: 100%;
+    max-width: 250px;
+    font-size: 20px;
+    padding: 8px 30px;
+    text-decoration: none;
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+    border-radius: 20px;
+    background-color: #1a75ff;    
+    border: 1px solid #444;
+    margin-bottom: 30px;
+}
+#botao a:hover{
+    box-shadow: 4px 4px 0px #1a75ff;
+    /* background-color: rgba(26,117,255,0.4); */
+    background-color: #33ff99;
+    border: 1px solid #1a75ff;
+}

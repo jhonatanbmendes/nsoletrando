@@ -1,0 +1,51 @@
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 20px 0;
+}
+#perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+.avatar{
+    width: 150px;
+    border: 3px solid #000;
+    border-radius: 50%;
+}
+.apelido{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+#alterar{
+    display: flex;
+    justify-content: space-around;
+    padding: 6vh;
+}
+#alterar a{
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+    display: block;
+    padding: 8px 20px;
+    background-color: #1a75ff;    
+    border: 1px solid #444;
+    border-radius: 20px;
+}
+#alterar a:hover{
+    background-color: #33ff99;
+    border: 1px solid #1a75ff;
+    box-shadow: 4px 4px 0px #1a75ff;
+}
+
+@media screen and (max-width: 455px){
+
+    #alterar div{
+        margin: 0 5px;
+        text-align: center;
+    }
+
+}

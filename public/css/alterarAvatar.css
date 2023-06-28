@@ -1,0 +1,24 @@
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 20px 0;
+}
+form{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-items: center;
+}
+form input{
+    width: 120px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 439px){
+
+    form{
+        grid-template-columns: auto auto;
+    }
+
+}

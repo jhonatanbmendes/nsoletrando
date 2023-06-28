@@ -1,0 +1,65 @@
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 20px 0;
+}
+
+
+#lista{
+    display: flex;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 0 5px 8px 10px;
+}
+#lista div, .item div{
+    width: 100%;
+}
+.posicao{
+    max-width: 35px;
+}
+.nome{
+    display: flex;
+    align-items: center;
+}
+.pontos{
+    max-width: 90px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.item{
+    display: flex;
+    align-items: center;
+    background-color: rgba(26,117,255,0.3);
+    /* background-color: rgba(68,68,68,0.4); */
+    padding: 0 10px;
+    font-size: 22px;
+    padding-top: 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+/* .item{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding: 0 5px;
+    font-size: 22px;
+    padding-top: 10px;
+} */
+.imagem{
+    flex: 0;
+}
+.avatar{
+    width: 70px;
+    border-radius: 50%;
+}
+.apelido{
+    padding-left: 15px; 
+}
+
+.pontos img{
+    width: 40px;
+    margin-right: 15px;
+}

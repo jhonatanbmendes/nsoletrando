@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soletrando Palmira</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/externo.css">
+<body>
+    <div id="conteudo">
+        <header>
+            <a href="#"><img id="logo" src="img/logo.png" alt="Logo"></a>
+            <div>Soletrando Palmira</div>
+            <!-- <a href="#"><img id="sair" src="img/sair.png" alt="Sair">Sair</a> -->
+        </header>
+        <main>
+            <div id="corpo">
+                
+                <!-- INICIO DO CONTEUDO -->
+                
+                <div id="titulo">Cadastro de Aluno</div>
+                <div id="alerta">
+                    <?php if(!empty($flash)): ?>
+                        <?php echo $flash; ?>
+                    <?php endif; ?>
+                </div>
+                <form action="" method="post">
+                    <input name="nome" type="text" placeholder="Digite seu nome" autocomplete="off">
+                    <select name="turma">
+                        <option value="">Selecione sua turma</option>
+                        <option value="3º ano A">3º ano A</option>
+                        <option value="3º ano B">3º ano B</option>
+                        <option value="3º ano C">3º ano C</option>
+                        <option value="3º ano D">3º ano D</option>
+                        <option value="3º ano E">3º ano E</option>
+                        <option value="3º ano F">3º ano F</option>
+                        <option value="3º ano G">3º ano G</option>
+                        <option value="4º ano A">4º ano A</option>
+                        <option value="4º ano B">4º ano B</option>
+                        <option value="4º ano C">4º ano C</option>
+                        <option value="4º ano D">4º ano D</option>
+                        <option value="4º ano E">4º ano E</option>
+                        <option value="4º ano F">4º ano F</option>
+                        <option value="5º ano A">5º ano A</option>
+                        <option value="5º ano B">5º ano B</option>
+                        <option value="5º ano C">5º ano C</option>
+                        <option value="5º ano D">5º ano D</option>
+                        <option value="5º ano E">5º ano E</option>
+                        <option value="5º ano F">5º ano F</option>
+                    </select>
+                    <input name="dataNascimento" type="text" placeholder="Digite a Data de Nascimento" id="nascimento">
+                    <input name="usuario" type="text" placeholder="Digite um usuário" autocomplete="off">
+                    <input name="senha" type="password" placeholder="Digite uma senha">
+                    <button id="botao">Cadastrar</button>
+                    <a href="login.html">Já Tenho Cadastro</a>
+                </form>
+
+                
+                <!-- FINAL DO CONTEUDO -->
+
+            </div>
+        </main>
+        <footer>
+            <div>Escola Municipal Palmira de Castro Machado | 2023</div>
+        </footer>
+    </div>
+</body>
+</html>

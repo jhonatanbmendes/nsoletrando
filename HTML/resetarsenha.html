@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soletrando Palmira</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/externo.css">
+</head>
+<body>
+    <div id="conteudo">
+        <header>
+            <a href="#"><img id="logo" src="img/logo.png" alt="Logo"></a>
+            <div>Soletrando Palmira</div>
+            <!-- <a href="#"><img id="sair" src="img/sair.png" alt="Sair">Sair</a> -->
+        </header>
+        <main>
+            <div id="corpo">
+                
+                <!-- INICIO DO CONTEUDO -->
+                
+                <div id="titulo">Resetar Senha</div>
+                <div id="alerta">
+                <?php if(!empty($flash)): ?>
+                    <?php echo $flash; ?>
+                <?php endif; ?>
+                </div>
+                <form action="" method="post">
+                    <input name="dataNascimento" type="text" placeholder="Digite a Data de Nascimento" id="nascimento">
+                    <input name="usuario" type="text" placeholder="Digite o usuário" autocomplete="off">
+                    <input name="novasenha" type="password" placeholder="Digite a Nova Senha">
+                    <button id="botao">Confirmar</button>
+                    <a href="login.html">Fazer Login</a>
+                </form>
+                
+                <!-- FINAL DO CONTEUDO -->
+
+            </div>
+        </main>
+        <footer>
+            <div>Escola Municipal Palmira de Castro Machado | 2023</div>
+        </footer>
+    </div>
+</body>
+</html>

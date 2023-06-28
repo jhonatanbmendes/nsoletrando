@@ -1,0 +1,72 @@
+header{
+    justify-content: center;
+}
+header div{
+    padding-left: 20px;
+}
+header a{
+    cursor: unset;
+}
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 20px 0;
+}
+
+#alerta{
+    background-color: red;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 60%;
+    border-radius: 5px;
+    font-size: 18px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 60%;
+}
+form input, select{
+    border: none;
+    outline: none;
+    margin-bottom: 15px;
+    font-size: 20px;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+#botao{
+    font-size: 20px;
+    padding: 5px 8px;
+    border-radius: 20px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background-color: #1a75ff;
+    border: 1px solid #444;
+    cursor: pointer;
+}
+#botao:hover{
+    background-color: #33ff99;
+    border: 1px solid #1a75ff;
+    box-shadow: 4px 4px 0px #1a75ff;
+}
+form a{
+    margin: auto;
+    width: 160px;
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 440px){
+
+    form{
+        max-width: 80%;
+    }
+
+}
+
+/* Página Cadastrar aluno */

@@ -142,7 +142,7 @@ class LoginHandler {
 
             Pessoa::update()
                 ->set('token',$token)
-                ->where('usuario',$usuario)
+                ->where('id',$pessoa['id'])
             ->execute();
 
             return $token;

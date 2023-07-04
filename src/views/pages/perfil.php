@@ -1,9 +1,5 @@
 <?php $render('header',['css'=> 'perfil']); ?> 
 
-<!-- Opa, <?=$nome;?> - Perfil
-
-</br><a href="<?=$base;?>/">Voltar</a> -->
-
 <nav>
     <div><a href="<?=$base;?>/">Início</a></div>
     <div><a href="<?=$base;?>/jogo">Jogar</a></div>
@@ -13,8 +9,8 @@
 <div id="titulo">Perfil</div>
 <section id="perfil">
     <div>
-        <div><img src="<?=$base;?>/img/avatar.png" alt="Avatar" class="avatar"></div>
-        <div class="apelido">Jhonatan</div>
+        <div><img src="<?=$base;?>/img/avatar/<?=$pessoa->avatar;?>.png" alt="Avatar" class="avatar"></div>
+        <div class="apelido"><?=$pessoa->nome;?></div>
     </div>
     <div></div>
 </section>

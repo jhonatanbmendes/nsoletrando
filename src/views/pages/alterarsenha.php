@@ -13,12 +13,12 @@
 <div id="titulo">Alterar Senha</div>
 <section id="senha">
     <section id="perfil">
-        <div><img src="<?=$base;?>/img/avatar/avatar8.png" alt="Avatar" class="avatar"></div>
-        <div class="apelido">Jhonatan</div>
+        <div><img src="<?=$base;?>/img/avatar/<?=$pessoa->avatar;?>.png" alt="Avatar" class="avatar"></div>
+        <div class="apelido"><?=$pessoa->nome;?></div>
     </section>
     <form action="" method="post">
-        <input type="password" name="" id="" placeholder="Digite sua nova senha">
-        <input type="password" name="" id="" placeholder="Repita a nova senha">
+        <input type="password" name="senha1" placeholder="Digite sua nova senha">
+        <input type="password" name="senha2" placeholder="Repita a nova senha">
         <button>Salvar</button>
     </form>
 </section>

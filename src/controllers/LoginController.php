@@ -171,8 +171,4 @@ class LoginController extends Controller {
         }
     }
 
-    public function alterarSenha(){
-        $this->render('alterarsenha', ['nome'=> 'Jhonatan']);
-    }
-
 }

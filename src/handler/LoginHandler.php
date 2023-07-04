@@ -5,6 +5,7 @@ use \src\models\Pessoa;
 use \src\models\Perfil;
 use \src\models\Serie;
 use \src\models\Login;
+use \src\models\Avatar;
 
 class LoginHandler {
 
@@ -20,7 +21,11 @@ class LoginHandler {
                 $usuarioLogado->id = $data['id'];
                 $nomeUsuario = $data['nome'];
                 $nomeUsuario = explode(' ',$nomeUsuario);
-                $usuarioLogado->nome = $nomeUsuario[1];
+                $usuarioLogado->nome = $nomeUsuario[0];
+
+                $avatar = Avatar::select()->where('id', $data['id_avatar'])->one();
+
+                $usuarioLogado->avatar = $avatar['arquivo'];
 
                 return $usuarioLogado;
 

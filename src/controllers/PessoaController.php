@@ -16,7 +16,7 @@ class PessoaController extends Controller {
     }
 
     public function perfil(){
-        $this->render('perfil', ['nome'=> 'Jhonatan']);
+        $this->render('perfil', ['pessoa'=> $this->$usuarioLogado]);
     }
 
     public function alterarAvatar(){
@@ -25,6 +25,10 @@ class PessoaController extends Controller {
 
     public function rankingIndividual(){
         $this->render('rankingindividual', ['nome'=> 'Jhonatan']);
+    }
+    
+    public function alterarSenha(){
+        $this->render('alterarsenha', ['pessoa'=> $this->$usuarioLogado]);
     }
 
 

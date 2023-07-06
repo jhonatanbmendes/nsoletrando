@@ -59,6 +59,11 @@ class LoginHandler {
         $tipoPefil = Perfil::select()->where('id', $perfil)->one();
         return $tipoPefil;
     }
+
+    public static function verificaToken($token){
+        $pessoa = Pessoa::select()->where('token', $token)->one();
+        return $pessoa;
+    }
     
     public static function perfil(){
         $dados = Perfil::select()->get();

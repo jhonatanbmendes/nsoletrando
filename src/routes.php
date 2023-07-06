@@ -9,8 +9,13 @@ $router->get('/login', 'LoginController@entrar');
 $router->post('/login', 'LoginController@entrarAction');
 $router->get('/resetarsenha', 'LoginController@resetarSenha');
 $router->post('/resetarsenha', 'LoginController@resetarSenhaAction');
+
+$router->get('/chave', 'LoginController@chave');
+$router->post('/chave', 'LoginController@chaveAction');
 $router->get('/cadastrar', 'LoginController@cadastrar');
 $router->post('/cadastrar', 'LoginController@cadastrarAction');
+
+
 $router->get('/jogo', 'PalavraController@jogo');
 // $router->post('/jogo', 'PalavraController@jogoAction');
 $router->get('/resultado', 'PalavraController@resultado');
@@ -22,13 +27,18 @@ $router->get('/alterarsenha', 'PessoaController@alterarSenha');
 // $router->post('/alterarsenha', 'PessoaController@alterarSenhaAction');
 
 //PROFESSOR
-$router->get('/professor/home', 'ProfessorHomeController@index');
+$router->get('/professor', 'ProfessorHomeController@index');
 
 //GESTOR
-$router->get('/gestor/home', 'GestorHomeController@index');
+$router->get('/gestor', 'GestorHomeController@index');
 
 // ADMINISTRADOR
-$router->get('/administrador/home', 'AdministradorHomeController@index');
+$router->get('/administrador', 'AdministradorHomeController@index');
+$router->get('/administrador/cadastrar', 'AdministradorHomeController@cadastrar');
+$router->post('/administrador/cadastrar', 'AdministradorHomeController@cadastrarAction');
+$router->get('/administrador/precadastro', 'AdministradorHomeController@precadastro');
+$router->post('/administrador/precadastro', 'AdministradorHomeController@precadastroAction');
+$router->get('/administrador/inativargestor/{id}', 'AdministradorHomeController@inativarGestor');
 
 
 $router->get('/adm/sobre', 'HomeController@sobre');

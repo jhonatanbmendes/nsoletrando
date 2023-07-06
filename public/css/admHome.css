@@ -1,0 +1,76 @@
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 20px 0;
+}
+
+#btn{
+    display: flex;
+    justify-content: space-around;
+    padding: 6vh;
+}
+#btn a{
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+    display: block;
+    padding: 8px 20px;
+    background-color: #1a75ff;    
+    border: 1px solid #444;
+    border-radius: 20px;
+}
+#btn a:hover{
+    background-color: #33ff99;
+    border: 1px solid #1a75ff;
+    box-shadow: 4px 4px 0px #1a75ff;
+}
+
+#lista{
+    display: flex;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 0 5px 8px 10px;
+}
+#lista div, .item div{
+    width: 100%;
+}
+.posicao{
+    max-width: 35px;
+}
+.nome{
+    display: flex;
+    align-items: center;
+}
+.pontos{
+    max-width: 90px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.item{
+    display: flex;
+    align-items: center;
+    background-color: rgba(26,117,255,0.3);
+    /* background-color: rgba(68,68,68,0.4); */
+    padding: 0 10px;
+    font-size: 22px;
+    padding-top: 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+.imagem{
+    flex: 0;
+}
+.avatar{
+    width: 70px;
+    border-radius: 50%;
+}
+.apelido{
+    padding-left: 15px; 
+}
+
+.pontos a{
+    color: #000;
+}

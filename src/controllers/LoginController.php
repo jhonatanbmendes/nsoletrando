@@ -3,6 +3,9 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handler\LoginHandler;
+use \src\models\Precadastro;
+use \src\models\Serie;
+use \src\models\Perfil;
 
 class LoginController extends Controller {
 
@@ -31,7 +34,21 @@ class LoginController extends Controller {
 
                 if($token){
                     $_SESSION['token'] = $token;
-                    $this->redirect('/');
+                    $pessoa = LoginHandler::verificaToken($token);
+                    $perfil = LoginHandler::verificaPerfil($pessoa['id_perfil']);
+                    if($perfil['nome'] === 'aluno'){
+                        $this->redirect('/');
+                    }
+                    if($perfil['nome'] === 'professor'){
+                        $this->redirect('/');
+                    }
+                    if($perfil['nome'] === 'gestor'){
+                        $this->redirect('/gestor');
+                    }
+                    if($perfil['nome'] === 'administrador'){
+                        $this->redirect('/administrador');
+                    }
+
                 }else{
                     $_SESSION['flash'] = 'Os dados não conferem.';
                     $this->redirect('/login');
@@ -100,21 +117,76 @@ class LoginController extends Controller {
 
     }
 
-    //OK
-    public function cadastrar(){
+    public function chave(){
         $flash = '';
         if(!empty($_SESSION['flash'])){
             $flash = $_SESSION['flash'];
             $_SESSION['flash'] = '';
         }
 
-        $perfil = LoginHandler::perfil();
-        $serie = LoginHandler::serie();
+        $chave = filter_input(INPUT_POST,'chave', FILTER_SANITIZE_STRING);
+        $chave=htmlspecialchars($chave);
 
-        $ano = array_column($serie, 'ano');
-        $ano = array_unique($ano);
+        $this->render('chave', ['flash' => $flash]);
+    }
+    
+    public function chaveAction(){
+        $chave = filter_input(INPUT_POST,'chave', FILTER_SANITIZE_STRING);
+        $chave=htmlspecialchars($chave);
+
+        if($chave){
+            $dados = Precadastro::select()->where('chave', $chave)->one();
+
+            // mandar o redirect com argumento para fazer a busca no direto no cadastrar
+            if($dados){
+                $this->redirect('/cadastrar'.'/'.$dados['chave']);
+            }
+        }
         
-        $this->render('cadastrar',['flash' => $flash, 'perfil' => $perfil, 'ano' => $ano, 'serie' => $serie]);
+        $_SESSION['flash'] = 'Chave de Acesso Inválida.';
+        $this->redirect('/chave');
+
+    }
+
+    //OK
+    public function cadastrar($args){
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+
+        $precadastro = [];
+        $dados = Precadastro::select()->where('chave', $args['chave'])->one();
+        if($dados){
+            $newDados = new Precadastro();
+            $newDados->id = $dados['id'];
+            $newDados->nome = $dados['nome'];
+            $newDados->dataNascimento = $dados['data_nascimento'];
+            if($dadosItem['id_serie']){
+                $serie = Serie::select()->where('id', $dadosItem['id_serie'])->one();
+                $newDados->serie = $serie['ano'].'º ano '.$serie['turma'];
+            }else{
+                $newDados->serie = 'Não tem Série';
+            }
+            $perfil = Perfil::select()->where('id', $dados['id_perfil'])->one();
+            $newDados->perfil = $perfil['nome'];
+
+            $precadastro[] = $newDados;
+
+            var_dump($precadastro);
+
+            $this->render('cadastrar', ['precadastro' => $precadastro]);
+        }
+
+
+        // $perfil = LoginHandler::perfil();
+        // $serie = LoginHandler::serie();
+
+        // $ano = array_column($serie, 'ano');
+        // $ano = array_unique($ano);
+        
+        // $this->render('cadastrar',['flash' => $flash, 'perfil' => $perfil, 'ano' => $ano, 'serie' => $serie]);
     }
     
     //OK

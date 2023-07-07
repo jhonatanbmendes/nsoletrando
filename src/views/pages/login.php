@@ -15,7 +15,7 @@
     <input name="senha" type="password" placeholder="Senha">
     <button id="botao">Entrar</button>
     <a href="<?=$base?>/resetarsenha">Esqueci minha Senha</a>
-    <a href="<?=$base?>/cadastrar">Não sou Cadastrado</a>
+    <a href="<?=$base?>/chave">Não sou Cadastrado</a>
 </form>
 
 <?php $render('footer'); ?>

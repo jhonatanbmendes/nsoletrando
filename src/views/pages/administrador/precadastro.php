@@ -17,12 +17,14 @@
 </section>
 <?php if(!empty($precadastro)):?>
 <?php foreach($precadastro as $precadastroItem):?>
+<?php if($precadastroItem->status != 'efetivo'):?>
 <section class="item">
     <div class="nome">
         <div class="apelido"><?=$precadastroItem->nome;?> - <?=$precadastroItem->chave;?></div>
     </div>
-    <div class="pontos"><a href="<?=$base;?>/administrador/inativargestor/<?=$precadastroItem->id?>"><?=$precadastroItem->status?></a></div>
+    <div class="pontos"><a href="<?=$base;?>/administrador/inativargestor/<?=$precadastroItem->id;?>"><?=$precadastroItem->status;?></a></div>
 </section>
+<?php endif;?>
 <?php endforeach;?>
 <?php endif;?>
 

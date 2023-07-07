@@ -137,9 +137,10 @@ class LoginController extends Controller {
         if($chave){
             $dados = Precadastro::select()->where('chave', $chave)->one();
 
-            // mandar o redirect com argumento para fazer a busca no direto no cadastrar
-            if($dados){
-                $this->redirect('/cadastrar'.'/'.$dados['chave']);
+            if($dados['status'] === 'ativo'){
+                $_SESSION['chave'] = $dados['chave'];
+                $_SESSION['flash'] = '';
+                $this->redirect('/cadastrar');
             }
         }
         
@@ -149,7 +150,7 @@ class LoginController extends Controller {
     }
 
     //OK
-    public function cadastrar($args){
+    public function cadastrar(){
         $flash = '';
         if(!empty($_SESSION['flash'])){
             $flash = $_SESSION['flash'];
@@ -157,12 +158,16 @@ class LoginController extends Controller {
         }
 
         $precadastro = [];
-        $dados = Precadastro::select()->where('chave', $args['chave'])->one();
+        $chave = $_SESSION['chave'];
+        $dados = Precadastro::select()->where('chave', $chave)->one();
         if($dados){
             $newDados = new Precadastro();
             $newDados->id = $dados['id'];
             $newDados->nome = $dados['nome'];
-            $newDados->dataNascimento = $dados['data_nascimento'];
+            $data = $dados['data_nascimento'];
+            $data = explode('-',$data);
+            $data = $data['2'].'/'.$data['1'].'/'.$data['0'];
+            $newDados->dataNascimento = $data;
             if($dadosItem['id_serie']){
                 $serie = Serie::select()->where('id', $dadosItem['id_serie'])->one();
                 $newDados->serie = $serie['ano'].'º ano '.$serie['turma'];
@@ -170,13 +175,12 @@ class LoginController extends Controller {
                 $newDados->serie = 'Não tem Série';
             }
             $perfil = Perfil::select()->where('id', $dados['id_perfil'])->one();
-            $newDados->perfil = $perfil['nome'];
+            $newDados->perfil = ucfirst($perfil['nome']);
+            $titulo = ucfirst($perfil['nome']);
 
             $precadastro[] = $newDados;
 
-            var_dump($precadastro);
-
-            $this->render('cadastrar', ['precadastro' => $precadastro]);
+            $this->render('cadastrar', ['flash' => $flash, 'precadastro' => $precadastro, 'titulo' => $titulo]);
         }
 
 
@@ -191,46 +195,34 @@ class LoginController extends Controller {
     
     //OK
     public function cadastrarAction(){
-        $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);
-        $perfil = filter_input(INPUT_POST, 'perfil', FILTER_VALIDATE_INT);
-        $turma = filter_input(INPUT_POST, 'turma', FILTER_VALIDATE_INT);
-        $dataNascimento = filter_input(INPUT_POST, 'dataNascimento', FILTER_SANITIZE_STRING);
+        $chave = $_SESSION['chave'];
+        $dados = Precadastro::select()->where('chave', $chave)->one();
+        $nome = $dados['nome'];
+        $perfil = $dados['id_perfil'];
+        $turma = $dados['id_serie'];
+        $dataNascimento = $dados['data_nascimento'];
         $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
         $senha = filter_input(INPUT_POST, 'senha');
         $termo = filter_input(INPUT_POST, 'termo', FILTER_SANITIZE_STRING);
         
         // para evitar invasão XSS
-        $nome=htmlspecialchars($nome);
         $usuario=htmlspecialchars($usuario);
         $termo=htmlspecialchars($termo);
-
+        
         // TERMINEI A PARTE DE INSERÇÃO DE DADOS NO BANCO, MAS AINDA NÃO TESTEI. FALTA CRIAR A PÁGINA PARA ATUALIZAR O AVATAR
-
-        if($nome && $perfil && $usuario && $senha && $termo){
-            $dataNascimento = explode('/',$dataNascimento);
-            if(count($dataNascimento) != 3){
-                $_SESSION['flash'] = 'Data de nascimento inválida.';
-                $this->redirect('/cadastrar');
-            }
-            
-            $dataNascimento = $dataNascimento[2].'-'.$dataNascimento[1].'-'.$dataNascimento[0];
-            if(strtotime($dataNascimento) === false){
-                $_SESSION['flash'] = 'Data de nascimento inválida.';
-                $this->redirect('/cadastrar');
-            }
-
-            // ajustar essa verificação de perfil por id
-            $tipoPerfil = LoginHandler::verificaPerfil($perfil);
-            if($tipoPerfil['nome'] === "aluno" or $tipoPerfil['nome'] === "professor"){
-                if(!$turma){
-                    $_SESSION['flash'] = 'Selecione todos os dados.';
-                    $this->redirect('/cadastrar');
-                }
-            }
-
+        
+        if($usuario && $senha && $termo){
             if(LoginHandler::existeUsuario($usuario) === false){
-                $token = LoginHandler::addPessoa($nome, $tipoPerfil['id'], $turma, $dataNascimento, $usuario, $senha);
+                $token = LoginHandler::addPessoa($nome, $perfil, $turma, $dataNascimento, $usuario, $senha);
                 $_SESSION['token'] = $token;
+                $_SESSION['chave'] = '';
+                if($dados['status'] == 'ativo'){ // COLOCAR A PALAVRA EFETIVO PARA CHAVE CADASTRADA (ALTERAR NA BUSCA DO ADMINISTRADOR.)
+                    Precadastro::update()
+                        ->set('status', 'inativo')
+                        ->where('id', $dados['id'])
+                    ->execute();
+                }
+                // DEPOIS TEM QUE ENCAMINHAR PARA A PÁGINA DE ESCOLHER O AVATAR.
                 $this->redirect('/');
             }else{
                 $_SESSION['flash'] = 'Esse nome de usuário já existe.';
@@ -242,5 +234,58 @@ class LoginController extends Controller {
             $this->redirect('/cadastrar');
         }
     }
+    // ESSA VERSÃO É DE BACKUP
+    // public function cadastrarAction(){
+    //     $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);
+    //     $perfil = filter_input(INPUT_POST, 'perfil', FILTER_VALIDATE_INT);
+    //     $turma = filter_input(INPUT_POST, 'turma', FILTER_VALIDATE_INT);
+    //     $dataNascimento = filter_input(INPUT_POST, 'dataNascimento', FILTER_SANITIZE_STRING);
+    //     $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
+    //     $senha = filter_input(INPUT_POST, 'senha');
+    //     $termo = filter_input(INPUT_POST, 'termo', FILTER_SANITIZE_STRING);
+        
+    //     // para evitar invasão XSS
+    //     $nome=htmlspecialchars($nome);
+    //     $usuario=htmlspecialchars($usuario);
+    //     $termo=htmlspecialchars($termo);
+
+    //     // TERMINEI A PARTE DE INSERÇÃO DE DADOS NO BANCO, MAS AINDA NÃO TESTEI. FALTA CRIAR A PÁGINA PARA ATUALIZAR O AVATAR
+
+    //     if($nome && $perfil && $usuario && $senha && $termo){
+    //         $dataNascimento = explode('/',$dataNascimento);
+    //         if(count($dataNascimento) != 3){
+    //             $_SESSION['flash'] = 'Data de nascimento inválida.';
+    //             $this->redirect('/cadastrar');
+    //         }
+            
+    //         $dataNascimento = $dataNascimento[2].'-'.$dataNascimento[1].'-'.$dataNascimento[0];
+    //         if(strtotime($dataNascimento) === false){
+    //             $_SESSION['flash'] = 'Data de nascimento inválida.';
+    //             $this->redirect('/cadastrar');
+    //         }
+
+    //         // ajustar essa verificação de perfil por id
+    //         $tipoPerfil = LoginHandler::verificaPerfil($perfil);
+    //         if($tipoPerfil['nome'] === "aluno" or $tipoPerfil['nome'] === "professor"){
+    //             if(!$turma){
+    //                 $_SESSION['flash'] = 'Selecione todos os dados.';
+    //                 $this->redirect('/cadastrar');
+    //             }
+    //         }
+
+    //         if(LoginHandler::existeUsuario($usuario) === false){
+    //             $token = LoginHandler::addPessoa($nome, $tipoPerfil['id'], $turma, $dataNascimento, $usuario, $senha);
+    //             $_SESSION['token'] = $token;
+    //             $this->redirect('/');
+    //         }else{
+    //             $_SESSION['flash'] = 'Esse nome de usuário já existe.';
+    //             $this->redirect('/cadastrar');
+    //         }
+
+    //     }else{
+    //         $_SESSION['flash'] = 'Preencha todos os dados.';
+    //         $this->redirect('/cadastrar');
+    //     }
+    // }
 
 }

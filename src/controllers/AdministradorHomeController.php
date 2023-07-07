@@ -102,8 +102,10 @@ class AdministradorHomeController extends Controller {
             $newPrecadastro->nome = $dadosItem['nome'];
             if($dadosItem['status'] == 'ativo'){
                 $newPrecadastro->status = 'Inativar';
-            }else{
+            }elseif($dadosItem['status'] == 'inativo'){
                 $newPrecadastro->status = 'Ativar';
+            }else{
+                $newPrecadastro->status = 'efetivo';
             }
             $newPrecadastro->chave = $dadosItem['chave'];
             
@@ -126,8 +128,10 @@ class AdministradorHomeController extends Controller {
                 $newPrecadastro->nome = $dadosItem['nome'];
                 if($dadosItem['status'] == 'ativo'){
                     $newPrecadastro->status = 'Inativar';
-                }else{
+                }elseif($dadosItem['status'] == 'inativo'){
                     $newPrecadastro->status = 'Ativar';
+                }else{
+                    $newPrecadastro->status = 'efetivo';
                 }
                 $newPrecadastro->chave = $dadosItem['chave'];
 
@@ -148,7 +152,7 @@ class AdministradorHomeController extends Controller {
                     ->set('status', 'inativo')
                     ->where('id', $dados['id'])
                 ->execute();
-            }else{
+            }elseif($dados['status'] == 'inativo'){
                 Precadastro::update()
                     ->set('status', 'ativo')
                     ->where('id', $dados['id'])

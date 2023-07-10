@@ -5,6 +5,7 @@ use \core\Controller;
 use \src\handler\LoginHandler;
 use \src\models\Pessoa;
 use \src\models\Perfil;
+use \src\models\Avatar;
 
 class GestorHomeController extends Controller {
 
@@ -25,7 +26,24 @@ class GestorHomeController extends Controller {
     }
 
     public function index() {
-        $this->render('gestor/home', ['pessoa' => $this->$usuarioLogado]);
+
+        $perfilProfessor = Perfil::select()->where('nome', 'professor')->one();
+        $perfilAluno = Perfil::select()->where('nome', 'aluno')->one();
+
+        $dados = Pessoa::select()->where('id_perfil', 'in', [$perfilAluno['id'],$perfilProfessor['id']])->get();
+
+        $pessoa = [];
+        foreach($dados as $dadosItem){
+            $newPessoa = new Pessoa();
+            $newPessoa->id = $dadosItem['id'];
+            $newPessoa->nome = $dadosItem['nome'];
+            $avatar = Avatar::select()->where('id', $dadosItem['id_avatar'])->one();
+            $newPessoa->avatar = $avatar['arquivo'];
+
+            $pessoa[] = $newPessoa;
+        }
+
+        $this->render('gestor/home', ['pessoa' => $pessoa]);
     }
 
     public function sobre() {

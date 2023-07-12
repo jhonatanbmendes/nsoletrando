@@ -36,6 +36,9 @@ $router->post('/gestor/precadastro', 'GestorHomeController@precadastroAction');
 $router->get('/gestor/listarprecadastro', 'GestorHomeController@listarprecadastro');
 $router->post('/gestor/listarprecadastro', 'GestorHomeController@listarprecadastroAction');
 $router->get('/gestor/inativarprecadastro/{id}', 'GestorHomeController@inativarprecadastro');
+$router->get('/gestor/cadastraravatar', 'GestorHomeController@cadastraravatar');
+$router->get('/gestor/cadastraremoji', 'GestorHomeController@cadastraremoji');
+$router->get('/gestor/cadastrarpalavra', 'GestorHomeController@cadastrarpalavra');
 
 // ADMINISTRADOR
 $router->get('/administrador', 'AdministradorHomeController@index');

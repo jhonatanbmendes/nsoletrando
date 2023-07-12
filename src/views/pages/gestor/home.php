@@ -4,11 +4,11 @@
 
 <div id="btn">
     <div><a href="<?=$base;?>/gestor/precadastro">Pré-Cadastro</a></div>
-    <div><a href="#">Cadastrar Palavra</a></div>
+    <div><a href="<?=$base;?>/gestor/cadastrarpalavra">Cadastrar Palavra</a></div>
 </div>
 <div id="btn">
-    <div><a href="#">Cadastrar Emoji</a></div>
-    <div><a href="#">Cadastrar Avatar</a></div>
+    <div><a href="<?=$base;?>/gestor/cadastraremoji">Cadastrar Emoji</a></div>
+    <div><a href="<?=$base;?>/gestor/cadastraravatar">Cadastrar Avatar</a></div>
 </div>
 
 <form action="/gestor/home" method="post">
@@ -27,16 +27,9 @@
         <div class="imagem"><img class="avatar" src="<?=$base;?>/img/avatar/<?=$pessoaItem->avatar;?>.png" alt="avatar"></div>
         <div class="apelido"><?=$pessoaItem->nome;?> - <?=$pessoaItem->serie;?></div>
     </div>
-    <div class="pontos"><a href="<?=$pessoaItem->id;?>">Alterar</a></div>
+    <div class="pontos"><a href="<?=$pessoaItem->id;?>">Editar</a></div>
 </section>
 <?php endforeach;?>
 <?php endif;?>
-<section class="item">
-    <div class="nome">
-        <div class="imagem"><img class="avatar" src="<?=$base;?>/img/avatar/avatar3.png" alt="avatar"></div>
-        <div class="apelido">Jhonatan - 3º ano A</div>
-    </div>
-    <div class="pontos"><a href="#">Inativar</a></div>
-</section>
 
 <?php $render('footer'); ?>

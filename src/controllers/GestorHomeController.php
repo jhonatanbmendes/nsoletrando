@@ -177,6 +177,42 @@ class GestorHomeController extends Controller {
         $this->redirect('/gestor/listarprecadastro');
     }
 
+    public function cadastraravatar(){
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+
+
+        $this->render('gestor/cadastraravatar');
+    }
+
+
+
+
+
+
+    
+
+    public function cadastraremoji(){
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+        $this->render('gestor/cadastraremoji');
+    }
+
+
+    public function cadastrarpalavra(){
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+        $this->render('gestor/cadastrarpalavra');
+    }
 
 
     public function sobre() {

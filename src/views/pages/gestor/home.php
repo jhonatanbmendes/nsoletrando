@@ -3,7 +3,7 @@
 <div id="titulo">Painel Administrativo</div>
 
 <div id="btn">
-    <div><a href="#">Pré-Cadastro</a></div>
+    <div><a href="<?=$base;?>/gestor/precadastro">Pré-Cadastro</a></div>
     <div><a href="#">Cadastrar Palavra</a></div>
 </div>
 <div id="btn">

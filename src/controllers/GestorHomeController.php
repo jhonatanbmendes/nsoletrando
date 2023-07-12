@@ -3,9 +3,11 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handler\LoginHandler;
+use \src\handler\GestorHandler;
 use \src\models\Pessoa;
 use \src\models\Perfil;
 use \src\models\Avatar;
+use \src\models\Precadastro;
 
 class GestorHomeController extends Controller {
 
@@ -45,6 +47,135 @@ class GestorHomeController extends Controller {
 
         $this->render('gestor/home', ['pessoa' => $pessoa]);
     }
+
+    public function precadastro(){
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+
+        $perfil = GestorHandler::getPerfil();
+        $serie = LoginHandler::serie();
+
+        $ano = array_column($serie, 'ano');
+        $ano = array_unique($ano);
+
+        $this->render('gestor/precadastro',['flash' => $flash, 'perfil' => $perfil, 'ano' => $ano, 'serie' => $serie]);
+    }
+
+    public function precadastroAction(){
+        $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);
+        $perfil = filter_input(INPUT_POST,'perfil', FILTER_VALIDATE_INT);
+        $serie = filter_input(INPUT_POST,'turma', FILTER_VALIDATE_INT);
+        $dataNascimento = filter_input(INPUT_POST, 'dataNascimento', FILTER_SANITIZE_STRING);
+
+        $nome=htmlspecialchars($nome);
+
+        if($nome && $perfil && $serie){
+            $dataNascimento = explode('/',$dataNascimento);
+            if(count($dataNascimento) != 3){
+                $_SESSION['flash'] = 'Data de nascimento inválida.';
+                $this->redirect('/gestor/precadastro');
+            }
+            
+            $dataNascimento = $dataNascimento[2].'-'.$dataNascimento[1].'-'.$dataNascimento[0];
+            if(strtotime($dataNascimento) === false){
+                $_SESSION['flash'] = 'Data de nascimento inválida.';
+                $this->redirect('/gestor/precadastro');
+            }
+
+            $chave = md5($dataNascimento.time());
+
+            Precadastro::insert([
+                'nome' => $nome,
+                'data_nascimento' => $dataNascimento,
+                'id_serie' => $serie,
+                'chave' => $chave,
+                'id_perfil' => $perfil
+            ])->execute();
+
+            $this->redirect('/gestor');
+        }else{
+            $_SESSION['flash'] = 'Preencha todos os dados.';
+            $this->redirect('/gestor/precadastro');
+        }
+
+    }
+
+    public function listarprecadastro(){
+        $perfilAluno = Perfil::select()->where('nome', 'aluno')->one();
+        $perfilProfessor = Perfil::select()->where('nome', 'professor')->one();
+        $dados = Precadastro::select()->where('id_perfil', 'in', [$perfilAluno['id'], $perfilProfessor['id']])->get();
+
+        $precadastro = [];
+        foreach($dados as $dadosItem){
+            $newPrecadastro = new Precadastro();
+            $newPrecadastro->id = $dadosItem['id'];
+            $newPrecadastro->nome = $dadosItem['nome'];
+            if($dadosItem['status'] == 'ativo'){
+                $newPrecadastro->status = 'Inativar';
+            }elseif($dadosItem['status'] == 'inativo'){
+                $newPrecadastro->status = 'Ativar';
+            }else{
+                $newPrecadastro->status = 'efetivo';
+            }
+            $newPrecadastro->chave = $dadosItem['chave'];
+            
+            $precadastro[] = $newPrecadastro;
+        }
+
+        $this->render('gestor/listarprecadastro', ['precadastro' => $precadastro]);
+    }
+
+    public function listarprecadastroAction(){
+        $pesquisa = filter_input(INPUT_POST,'pesquisa', FILTER_SANITIZE_STRING);
+
+        $dados = Precadastro::select()->Where('nome', 'like','%'.$pesquisa.'%')->get();
+
+        $resultado = [];
+        if($dados){
+            foreach($dados as $dadosItem){
+                $newPrecadastro = new Precadastro();
+                $newPrecadastro->id = $dadosItem['id'];
+                $newPrecadastro->nome = $dadosItem['nome'];
+                if($dadosItem['status'] == 'ativo'){
+                    $newPrecadastro->status = 'Inativar';
+                }elseif($dadosItem['status'] == 'inativo'){
+                    $newPrecadastro->status = 'Ativar';
+                }else{
+                    $newPrecadastro->status = 'efetivo';
+                }
+                $newPrecadastro->chave = $dadosItem['chave'];
+
+                $resultado[] = $newPrecadastro;
+            }
+        }
+
+        $this->render('gestor/listarprecadastro', ['precadastro' => $resultado]);
+    }
+
+    public function inativarprecadastro($args){
+        $args = intval($args['id']);
+        if(is_int($args)){
+            $dados = Precadastro::select()->where('id', $args)->one();
+            if($dados['status'] == 'ativo'){
+                Precadastro::update()
+                    ->set('status', 'inativo')
+                    ->where('id', $dados['id'])
+                ->execute();
+            }elseif($dados['status'] == 'inativo'){
+                Precadastro::update()
+                    ->set('status', 'ativo')
+                    ->where('id', $dados['id'])
+                ->execute();
+            }
+        }
+        
+        $this->redirect('/gestor/listarprecadastro');
+    }
+
+
 
     public function sobre() {
         $this->render('adm/sobre');

@@ -31,6 +31,11 @@ $router->get('/professor', 'ProfessorHomeController@index');
 
 //GESTOR
 $router->get('/gestor', 'GestorHomeController@index');
+$router->get('/gestor/precadastro', 'GestorHomeController@precadastro');
+$router->post('/gestor/precadastro', 'GestorHomeController@precadastroAction');
+$router->get('/gestor/listarprecadastro', 'GestorHomeController@listarprecadastro');
+$router->post('/gestor/listarprecadastro', 'GestorHomeController@listarprecadastroAction');
+$router->get('/gestor/inativarprecadastro/{id}', 'GestorHomeController@inativarprecadastro');
 
 // ADMINISTRADOR
 $router->get('/administrador', 'AdministradorHomeController@index');

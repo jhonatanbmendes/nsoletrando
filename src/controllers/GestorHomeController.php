@@ -39,6 +39,8 @@ class GestorHomeController extends Controller {
             $newPessoa = new Pessoa();
             $newPessoa->id = $dadosItem['id'];
             $newPessoa->nome = $dadosItem['nome'];
+            $serie = GestorHandler::getSerieId($dadosItem['id_serie']);
+            $newPessoa->serie = $serie['ano'].'º ano '.strtoupper($serie['turma']);
             $avatar = Avatar::select()->where('id', $dadosItem['id_avatar'])->one();
             $newPessoa->avatar = $avatar['arquivo'];
 

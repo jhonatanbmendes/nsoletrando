@@ -25,7 +25,7 @@
 <section class="item">
     <div class="nome">
         <div class="imagem"><img class="avatar" src="<?=$base;?>/img/avatar/<?=$pessoaItem->avatar;?>.png" alt="avatar"></div>
-        <div class="apelido"><?=$pessoaItem->nome;?></div>
+        <div class="apelido"><?=$pessoaItem->nome;?> - <?=$pessoaItem->serie;?></div>
     </div>
     <div class="pontos"><a href="<?=$pessoaItem->id;?>">Alterar</a></div>
 </section>

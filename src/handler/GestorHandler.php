@@ -39,5 +39,10 @@ class GestorHandler {
         return $serie;
     }
 
+    public static function getSerieId($id){
+        $dados = Serie::select()->where('id', $id)->one();
+
+        return $dados;
+    }
 
 }

@@ -7,6 +7,7 @@ use \src\models\Serie;
 use \src\models\Login;
 use \src\models\Avatar;
 use \src\models\Emoji;
+use \src\models\Palavra;
 
 class GestorHandler {
 
@@ -48,16 +49,25 @@ class GestorHandler {
 
     public static function addAvatar($nome, $arquivo){
         Avatar::insert([
-            'nome' => $nome,
+            'nome' => strtolower($nome),
             'arquivo' => $arquivo
         ])->execute();
     }
 
     public static function addEmoji($nome, $tipo, $arquivo){
         Emoji::insert([
-            'nome' => $nome,
-            'tipo' => $tipo,
+            'nome' => strtolower($nome),
+            'tipo' => strtolower($tipo),
             'arquivo' => $arquivo
+        ])->execute();
+    }
+
+    public static function addPalavra($palavra, $newNome, $ano, $nivel){
+        Palavra::insert([
+            'palavra' => strtolower($palavra),
+            'nivel' => $nivel,
+            'serie_ano' => $ano,
+            'arquivo' => $newNome
         ])->execute();
     }
 

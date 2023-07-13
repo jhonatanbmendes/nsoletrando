@@ -41,6 +41,7 @@ $router->post('/gestor/cadastraravatar', 'GestorHomeController@cadastraravatarAc
 $router->get('/gestor/cadastraremoji', 'GestorHomeController@cadastraremoji');
 $router->post('/gestor/cadastraremoji', 'GestorHomeController@cadastraremojiAction');
 $router->get('/gestor/cadastrarpalavra', 'GestorHomeController@cadastrarpalavra');
+$router->post('/gestor/cadastrarpalavra', 'GestorHomeController@cadastrarpalavraAction');
 
 // ADMINISTRADOR
 $router->get('/administrador', 'AdministradorHomeController@index');

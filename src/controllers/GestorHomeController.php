@@ -262,7 +262,43 @@ class GestorHomeController extends Controller {
             $flash = $_SESSION['flash'];
             $_SESSION['flash'] = '';
         }
-        $this->render('gestor/cadastrarpalavra');
+
+        $serie = LoginHandler::serie();
+
+        $ano = array_column($serie, 'ano');
+        $ano = array_unique($ano);
+
+        $this->render('gestor/cadastrarpalavra',['flash' => $flash, 'ano' => $ano]);
+    }
+
+    public function cadastrarpalavraAction(){
+        $palavra = filter_input(INPUT_POST,'palavra', FILTER_SANITIZE_STRING);
+        $arquivo = $_FILES['arquivo'];
+        $ano = filter_input(INPUT_POST,'ano', FILTER_VALIDATE_INT);
+        $nivel = filter_input(INPUT_POST,'nivel', FILTER_VALIDATE_INT);
+
+        if($palavra && $ano && $nivel){
+            if(isset($_FILES['arquivo']) && !empty($_FILES['arquivo']['tmp_name'])){
+                if($arquivo['type'] == 'audio/mpeg'){
+
+                    $newNome = md5(time().rand(0,999)).'.mp3';
+                    $diretorio = 'media/';
+                    move_uploaded_file($arquivo['tmp_name'], $diretorio.$newNome);
+
+                    GestorHandler::addPalavra($palavra, $newNome, $ano, $nivel);
+                    
+                    $_SESSION['flash'] = '';
+                    $this->render('gestor/cadastrarpalavra');
+                }
+            }else{
+                $_SESSION['flash'] = 'Preencha todos do dados.';
+                $this->redirect('/gestor/cadastrarpalavra');
+            }
+        }else{
+            $_SESSION['flash'] = 'Preencha todos do dados.';
+            $this->redirect('/gestor/cadastrarpalavra');
+        }
+
     }
 
 

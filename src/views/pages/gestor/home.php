@@ -24,7 +24,7 @@
 <?php foreach($pessoa as $pessoaItem):?>
 <section class="item">
     <div class="nome">
-        <div class="imagem"><img class="avatar" src="<?=$base;?>/img/avatar/<?=$pessoaItem->avatar;?>.png" alt="avatar"></div>
+        <div class="imagem"><img class="avatar" src="<?=$base;?>/img/avatar/<?=$pessoaItem->avatar;?>" alt="avatar"></div>
         <div class="apelido"><?=$pessoaItem->nome;?> - <?=$pessoaItem->serie;?></div>
     </div>
     <div class="pontos"><a href="<?=$pessoaItem->id;?>">Editar</a></div>

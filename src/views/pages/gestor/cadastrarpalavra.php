@@ -6,43 +6,27 @@
         <?php echo $flash; ?>
     <?php endif; ?>
 </div>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <input name="palavra" type="text" placeholder="Digite a Palavra" autocomplete="off">
-    <input name="arquivo" type="file">
-    <select name="turma">
+    <input name="arquivo" type="file" accept="audio/mpeg">
+    <select name="ano">
         <option value="">Selecione sua turma</option>
-        <option value="3º ano A">3º ano A</option>
-        <option value="3º ano B">3º ano B</option>
-        <option value="3º ano C">3º ano C</option>
-        <option value="3º ano D">3º ano D</option>
-        <option value="3º ano E">3º ano E</option>
-        <option value="3º ano F">3º ano F</option>
-        <option value="3º ano G">3º ano G</option>
-        <option value="4º ano A">4º ano A</option>
-        <option value="4º ano B">4º ano B</option>
-        <option value="4º ano C">4º ano C</option>
-        <option value="4º ano D">4º ano D</option>
-        <option value="4º ano E">4º ano E</option>
-        <option value="4º ano F">4º ano F</option>
-        <option value="5º ano A">5º ano A</option>
-        <option value="5º ano B">5º ano B</option>
-        <option value="5º ano C">5º ano C</option>
-        <option value="5º ano D">5º ano D</option>
-        <option value="5º ano E">5º ano E</option>
-        <option value="5º ano F">5º ano F</option>
+        <?php foreach($ano as $anoItem):?>
+        <option value="<?=$anoItem;?>"><?=$anoItem;?>º ano</option>
+        <?php endforeach;?>
     </select>
     <select name="nivel">
         <option value="">Selecione um nível</option>
-        <option value="3º ano A">Nível 1</option>
-        <option value="3º ano B">Nível 2</option>
-        <option value="3º ano C">Nível 3</option>
-        <option value="3º ano D">Nível 4</option>
-        <option value="3º ano E">Nível 5</option>
-        <option value="3º ano F">Nível 6</option>
-        <option value="3º ano G">Nível 7</option>
-        <option value="4º ano A">Nível 8</option>
-        <option value="4º ano B">Nível 9</option>
-        <option value="4º ano C">Nível 10</option>
+        <option value="1">Nível 1</option>
+        <option value="2">Nível 2</option>
+        <option value="3">Nível 3</option>
+        <option value="4">Nível 4</option>
+        <option value="5">Nível 5</option>
+        <option value="6">Nível 6</option>
+        <option value="7">Nível 7</option>
+        <option value="8">Nível 8</option>
+        <option value="9">Nível 9</option>
+        <option value="10">Nível 10</option>
     </select>
     <button id="botao">Cadastrar</button>
 </form>

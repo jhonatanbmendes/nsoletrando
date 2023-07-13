@@ -184,16 +184,37 @@ class GestorHomeController extends Controller {
             $_SESSION['flash'] = '';
         }
 
-
-        $this->render('gestor/cadastraravatar');
+        $this->render('gestor/cadastraravatar', ['flash' => $flash]);
     }
 
+    public function cadastraravatarAction(){
+        $arquivo = $_FILES['arquivo'];
+        $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);
 
+        if($nome){
+            if(isset($_FILES['arquivo']) && !empty($_FILES['arquivo']['tmp_name'])){
+                if($arquivo['type'] == 'image/png'){
+                    
+                    $nomeImagem = md5(time().rand(0,999)).'.png';
+                    $diretorio = 'img/avatar/';
+                    move_uploaded_file($arquivo['tmp_name'], $diretorio.$nomeImagem);
+                    
+                    GestorHandler::addAvatar($nome, $nomeImagem);
+                    
+                    $_SESSION['flash'] = '';
+                    $this->render('gestor/cadastraravatar');
+                }
+            }else{
+                $_SESSION['flash'] = 'Preencha todos os dados.';
+                $this->redirect('/gestor/cadastraravatar');
+            }
+        }else{
+            $_SESSION['flash'] = 'Preencha todos do dados.';
+            $this->redirect('/gestor/cadastraravatar');
+        }
 
+    }
 
-
-
-    
 
     public function cadastraremoji(){
         $flash = '';
@@ -201,7 +222,37 @@ class GestorHomeController extends Controller {
             $flash = $_SESSION['flash'];
             $_SESSION['flash'] = '';
         }
-        $this->render('gestor/cadastraremoji');
+
+        $this->render('gestor/cadastraremoji', ['flash' => $flash]);
+    }
+
+    public function cadastraremojiAction(){
+        $arquivo = $_FILES['arquivo'];
+        $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);
+        $tipo = filter_input(INPUT_POST,'tipo', FILTER_SANITIZE_STRING);
+
+        if($nome && $tipo){
+            if(isset($_FILES['arquivo']) && !empty($_FILES['arquivo']['tmp_name'])){
+                if($arquivo['type'] == 'image/gif'){
+                    
+                    $nomeImagem = md5(time().rand(0,999)).'.gif';
+                    $diretorio = 'img/emoji/';
+                    move_uploaded_file($arquivo['tmp_name'], $diretorio.$nomeImagem);
+                    
+                    GestorHandler::addEmoji($nome, $tipo, $nomeImagem);
+                    
+                    $_SESSION['flash'] = '';
+                    $this->render('gestor/cadastraremoji');
+                }
+            }else{
+                $_SESSION['flash'] = 'Preencha todos os dados.';
+                $this->redirect('/gestor/cadastraremoji');
+            }
+        }else{
+            $_SESSION['flash'] = 'Preencha todos do dados.';
+            $this->redirect('/gestor/cadastraremoji');
+        }
+
     }
 
 

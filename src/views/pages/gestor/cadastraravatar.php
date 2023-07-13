@@ -7,8 +7,8 @@
     <?php endif; ?>
 </div>
 <form action="" method="post" enctype="multipart/form-data">
-    <input name="palavra" type="text" placeholder="Nome do avatar" autocomplete="off">
     <input name="arquivo" type="file" accept="image/png">
+    <input name="nome" type="text" placeholder="Nome do avatar" autocomplete="off">
     <button id="botao">Cadastrar</button>
 </form>
 

@@ -6,6 +6,7 @@ use \src\models\Perfil;
 use \src\models\Serie;
 use \src\models\Login;
 use \src\models\Avatar;
+use \src\models\Emoji;
 
 class GestorHandler {
 
@@ -43,6 +44,21 @@ class GestorHandler {
         $dados = Serie::select()->where('id', $id)->one();
 
         return $dados;
+    }
+
+    public static function addAvatar($nome, $arquivo){
+        Avatar::insert([
+            'nome' => $nome,
+            'arquivo' => $arquivo
+        ])->execute();
+    }
+
+    public static function addEmoji($nome, $tipo, $arquivo){
+        Emoji::insert([
+            'nome' => $nome,
+            'tipo' => $tipo,
+            'arquivo' => $arquivo
+        ])->execute();
     }
 
 }

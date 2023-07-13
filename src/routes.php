@@ -38,10 +38,17 @@ $router->post('/gestor/listarprecadastro', 'GestorHomeController@listarprecadast
 $router->get('/gestor/inativarprecadastro/{id}', 'GestorHomeController@inativarprecadastro');
 $router->get('/gestor/cadastraravatar', 'GestorHomeController@cadastraravatar');
 $router->post('/gestor/cadastraravatar', 'GestorHomeController@cadastraravatarAction');
+$router->get('/gestor/listaravatar', 'GestorHomeController@listaravatar');
+$router->get('/gestor/alteraravatar/{id}', 'GestorHomeController@alteraravatar');
 $router->get('/gestor/cadastraremoji', 'GestorHomeController@cadastraremoji');
 $router->post('/gestor/cadastraremoji', 'GestorHomeController@cadastraremojiAction');
+$router->get('/gestor/listaremoji', 'GestorHomeController@listaremoji');
+$router->get('/gestor/alteraremoji/{id}', 'GestorHomeController@alteraremoji');
 $router->get('/gestor/cadastrarpalavra', 'GestorHomeController@cadastrarpalavra');
 $router->post('/gestor/cadastrarpalavra', 'GestorHomeController@cadastrarpalavraAction');
+$router->get('/gestor/listarpalavra/{ano}', 'GestorHomeController@listarpalavraAno');
+$router->get('/gestor/listarpalavra', 'GestorHomeController@listarpalavra');
+$router->get('/gestor/alterarpalavra/{id}', 'GestorHomeController@alterarpalavra');
 
 // ADMINISTRADOR
 $router->get('/administrador', 'AdministradorHomeController@index');

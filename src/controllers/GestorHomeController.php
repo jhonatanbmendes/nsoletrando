@@ -215,6 +215,28 @@ class GestorHomeController extends Controller {
 
     }
 
+    public function listaravatar(){
+
+        $avatar = GestorHandler::getAvatar();
+
+        $this->render('gestor/listaravatar',['avatar' => $avatar]);
+    }
+
+    public function alteraravatar($args){
+        $args = intval($args['id']);
+        
+        if(is_int($args)){
+            $avatar = GestorHandler::UpdateAvatar($args);
+
+            var_dump($avatar);
+
+            if($avatar){
+                $this->render('gestor/alteraravatar',['avatar' => $avatar]);
+            }
+        }
+        // $this->redirect('/gestor/listaravatar');
+    }
+
 
     public function cadastraremoji(){
         $flash = '';
@@ -255,6 +277,28 @@ class GestorHomeController extends Controller {
 
     }
 
+    public function listaremoji(){
+
+        $emoji = GestorHandler::getEmoji();
+
+        $this->render('gestor/listaremoji',['emoji' => $emoji]);
+    }
+
+    public function alteraremoji($args){
+        $args = intval($args['id']);
+        
+        if(is_int($args)){
+            $emoji = GestorHandler::UpdateEmoji($args);
+
+            var_dump($emoji);
+
+            if($emoji){
+                $this->render('gestor/alteraremoji',['emoji' => $emoji]);
+            }
+        }
+        // $this->redirect('/gestor/listaremoji');
+    }
+
 
     public function cadastrarpalavra(){
         $flash = '';
@@ -288,7 +332,7 @@ class GestorHomeController extends Controller {
                     GestorHandler::addPalavra($palavra, $newNome, $ano, $nivel);
                     
                     $_SESSION['flash'] = '';
-                    $this->render('gestor/cadastrarpalavra');
+                    $this->redirect('/gestor/cadastrarpalavra');
                 }
             }else{
                 $_SESSION['flash'] = 'Preencha todos do dados.';
@@ -300,6 +344,45 @@ class GestorHomeController extends Controller {
         }
 
     }
+
+    public function listarpalavra(){
+
+        $palavra = GestorHandler::getPalavra();
+
+        $this->render('gestor/listarpalavra',['palavra' => $palavra]);
+    }
+
+    public function listarpalavraAno($args){
+        $args = intval($args['ano']);
+        
+        if(is_int($args)){
+
+            $palavra = GestorHandler::getPalavraAno($args);
+            
+            $this->render('gestor/listarpalavra',['palavra' => $palavra]);
+        }
+
+    }
+
+    public function alterarpalavra($args){
+        $args = intval($args['id']);
+        
+        if(is_int($args)){
+            $palavra = GestorHandler::UpdatePalavra($args);
+
+            var_dump($palavra);
+
+            if($palavra){
+                $this->render('gestor/alterarpalavra',['palavra' => $palavra]);
+            }
+        }
+        // $this->redirect('/gestor/listarpalavra');
+    }
+
+
+
+
+
 
 
     public function sobre() {

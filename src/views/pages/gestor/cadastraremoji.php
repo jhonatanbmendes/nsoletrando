@@ -17,4 +17,9 @@
     <button id="botao">Cadastrar</button>
 </form>
 
+<div id="btn">
+    <div><a href="<?=$base;?>/gestor/listaremoji">Lista de Emoji</a></div>
+    <div><a href="<?=$base;?>/gestor">Início</a></div>
+</div>
+
 <?php $render('footer'); ?>

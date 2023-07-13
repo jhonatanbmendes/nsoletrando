@@ -5,7 +5,7 @@
     padding: 25px 0 20px 0;
 }
 
-#btn{
+#btn, #link{
     display: flex;
     justify-content: space-evenly;
     padding: 1vh;
@@ -24,6 +24,17 @@
     background-color: #33ff99;
     border: 1px solid #1a75ff;
     box-shadow: 4px 4px 0px #1a75ff;
+}
+
+#link a{
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+    display: block;
+    padding: 5px 5px;
+    background-color: #1a75ff;    
+    border: 1px solid #444;
+    border-radius: 10px;
 }
 
 form{

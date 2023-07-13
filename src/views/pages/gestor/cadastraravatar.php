@@ -12,4 +12,9 @@
     <button id="botao">Cadastrar</button>
 </form>
 
+<div id="btn">
+    <div><a href="<?=$base;?>/gestor/listaravatar">Lista de Avatar</a></div>
+    <div><a href="<?=$base;?>/gestor">Início</a></div>
+</div>
+
 <?php $render('footer'); ?>

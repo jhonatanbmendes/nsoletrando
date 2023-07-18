@@ -1,4 +1,4 @@
-<?php $render('header',['css'=> 'externo']); ?>
+<?php $render('headerExterno',['css'=> 'externo']); ?>
 
 <div id="titulo">Validação da Chave de Acesso</div>
 <div id="alerta">

@@ -40,7 +40,7 @@ class LoginController extends Controller {
                         $this->redirect('/');
                     }
                     if($perfil['nome'] === 'professor'){
-                        $this->redirect('/');
+                        $this->redirect('/professor');
                     }
                     if($perfil['nome'] === 'gestor'){
                         $this->redirect('/gestor');
@@ -168,9 +168,9 @@ class LoginController extends Controller {
             $data = explode('-',$data);
             $data = $data['2'].'/'.$data['1'].'/'.$data['0'];
             $newDados->dataNascimento = $data;
-            if($dadosItem['id_serie']){
-                $serie = Serie::select()->where('id', $dadosItem['id_serie'])->one();
-                $newDados->serie = $serie['ano'].'º ano '.$serie['turma'];
+            if($dados['id_serie'] != null){
+                $serie = Serie::select()->where('id', $dados['id_serie'])->one();
+                $newDados->serie = $serie['ano'].'º ano '.strtoupper($serie['turma']);
             }else{
                 $newDados->serie = 'Não tem Série';
             }

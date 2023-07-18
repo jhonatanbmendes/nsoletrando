@@ -24,7 +24,8 @@ class PessoaController extends Controller {
     }
 
     public function rankingIndividual(){
-        $this->render('rankingindividual', ['nome'=> 'Jhonatan']);
+        
+        $this->render('rankingindividual', ['pessoa'=> $this->$usuarioLogado]);
     }
     
     public function alterarSenha(){

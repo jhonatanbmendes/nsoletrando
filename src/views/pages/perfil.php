@@ -9,7 +9,7 @@
 <div id="titulo">Perfil</div>
 <section id="perfil">
     <div>
-        <div><img src="<?=$base;?>/img/avatar/<?=$pessoa->avatar;?>.png" alt="Avatar" class="avatar"></div>
+        <div id="imagem"><img src="<?=$base;?>/img/avatar/<?=$pessoa->avatar;?>" alt="Avatar" class="avatar"></div>
         <div class="apelido"><?=$pessoa->nome;?></div>
     </div>
     <div></div>

@@ -19,9 +19,11 @@ class LoginHandler {
             if(count($data) > 0){
                 $usuarioLogado = new Pessoa();
                 $usuarioLogado->id = $data['id'];
-                $nomeUsuario = $data['nome'];
-                $nomeUsuario = explode(' ',$nomeUsuario);
-                $usuarioLogado->nome = $nomeUsuario[0];
+                // $nomeUsuario = $data['nome'];
+                // $nomeUsuario = explode(' ',$nomeUsuario);
+                // $usuarioLogado->nome = $nomeUsuario[0];
+                $usuarioLogado->nome = $data['nome'];
+                $usuarioLogado->acerto = $data['acerto'];
 
                 $avatar = Avatar::select()->where('id', $data['id_avatar'])->one();
 
@@ -161,6 +163,29 @@ class LoginHandler {
         }
     }
 
+    public static function getAvatar(){
+        $dados = Avatar::select()->get();
+
+        $avatar = [];
+        foreach($dados as $dadosItem){
+            $newDados = new Avatar();
+            $newDados->id = $dadosItem['id'];
+            $newDados->nome = ucfirst($dadosItem['nome']);
+            $newDados->arquivo = $dadosItem['arquivo'];
+
+            $avatar[] = $newDados;
+        }
+
+        return $avatar;
+    }
+
+    public static function updateAvatar($token, $id_avatar){
+
+        if($token && $id_avatar){
+            Pessoa::update()->set('id_avatar', $id_avatar)->where('token', $token)->execute();
+        }
+
+    }
 
 
 }

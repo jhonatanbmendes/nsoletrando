@@ -3,6 +3,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handler\LoginHandler;
+use \src\handler\AlunoHandler;
 
 class HomeController extends Controller {
 
@@ -16,7 +17,10 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        $this->render('home', ['nome' => 'Jhonatan']);
+
+        $pessoa = AlunoHandler::getAlunosHome();
+
+        $this->render('home', ['pessoa' => $pessoa]);
     }
 
     public function sobre() {

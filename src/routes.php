@@ -14,6 +14,8 @@ $router->get('/chave', 'LoginController@chave');
 $router->post('/chave', 'LoginController@chaveAction');
 $router->get('/cadastrar', 'LoginController@cadastrar');
 $router->post('/cadastrar', 'LoginController@cadastrarAction');
+$router->get('/listaravatar', 'LoginController@listaravatar');
+$router->get('/escolheravatar/{id}', 'LoginController@escolheravatar');
 
 
 $router->get('/jogo', 'PalavraController@jogo');

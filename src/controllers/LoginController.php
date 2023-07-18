@@ -218,12 +218,12 @@ class LoginController extends Controller {
                 $_SESSION['chave'] = '';
                 if($dados['status'] == 'ativo'){ // COLOCAR A PALAVRA EFETIVO PARA CHAVE CADASTRADA (ALTERAR NA BUSCA DO ADMINISTRADOR.)
                     Precadastro::update()
-                        ->set('status', 'inativo')
+                        ->set('status', 'efetivo')
                         ->where('id', $dados['id'])
                     ->execute();
                 }
                 // DEPOIS TEM QUE ENCAMINHAR PARA A PÁGINA DE ESCOLHER O AVATAR.
-                $this->redirect('/');
+                $this->redirect('/listaravatar');
             }else{
                 $_SESSION['flash'] = 'Esse nome de usuário já existe.';
                 $this->redirect('/cadastrar');
@@ -234,6 +234,30 @@ class LoginController extends Controller {
             $this->redirect('/cadastrar');
         }
     }
+
+    public function listaravatar(){
+
+        
+        $avatar = LoginHandler::getAvatar();
+        
+        $this->render('listaravatar',['avatar' => $avatar]);
+    }
+    
+    public function escolheravatar($args){
+        
+        $args = intval($args['id']);
+        if(is_int($args)){
+            
+            $pessoa = LoginHandler::updateAvatar($_SESSION['token'], $args);
+
+        }
+        
+        $this->redirect('/');
+    }
+
+
+
+
     // ESSA VERSÃO É DE BACKUP
     // public function cadastrarAction(){
     //     $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_STRING);

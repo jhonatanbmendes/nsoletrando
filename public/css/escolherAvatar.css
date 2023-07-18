@@ -1,0 +1,34 @@
+header{
+    justify-content: center;
+}
+header div{
+    padding-left: 20px;
+}
+header a{
+    cursor: unset;
+}
+
+#titulo{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding: 25px 0 20px 0;
+}
+section{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-items: center;
+}
+section img{
+    width: 120px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 439px){
+
+    section{
+        grid-template-columns: auto auto;
+    }
+
+}

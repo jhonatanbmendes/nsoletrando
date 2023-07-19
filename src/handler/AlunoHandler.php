@@ -63,6 +63,17 @@ class AlunoHandler {
         return $pessoa;
     }
 
+    public static function atualizaSenha($senha, $id){
+        $senha = md5($senha);
+        if($senha){
+            Login::update()->set('senha', $senha)->where('id_pessoa', $id)->execute();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
 
 
 }

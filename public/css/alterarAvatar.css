@@ -4,12 +4,12 @@
     text-align: center;
     padding: 25px 0 20px 0;
 }
-form{
+section{
     display: grid;
     grid-template-columns: auto auto auto;
     justify-items: center;
 }
-form input{
+section img{
     width: 120px;
     margin-bottom: 30px;
     border-radius: 50%;
@@ -17,7 +17,7 @@ form input{
 
 @media screen and (max-width: 439px){
 
-    form{
+    section{
         grid-template-columns: auto auto;
     }
 

@@ -6,16 +6,10 @@
 
 <div id="titulo">Escolha seu Avatar</div>
 
-<form action="" method="post">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar1.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar2.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar3.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar4.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar5.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar6.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar7.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar8.png" alt="avatar">
-    <input type="image" src="<?=$base;?>/img/avatar/avatar9.png" alt="avatar">
-</form>
+<section>
+    <?php foreach($avatar as $dadosItem): ?>
+        <a href="<?=$base;?>/alteraravatar/<?=$dadosItem->id;?>"><img src="<?=$base;?>/img/avatar/<?=$dadosItem->arquivo;?>" alt="<?=$dadosItem->id;?>"></a>
+    <?php endforeach; ?>
+</section>
 
 <?php $render('footer'); ?>

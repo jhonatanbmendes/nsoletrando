@@ -5,6 +5,17 @@
     padding: 25px 0 20px 0;
 }
 
+#alerta{
+    width: 100%;
+    max-width: 50%;
+    margin: auto;
+    background-color: red;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
 #senha{
     display: flex;
     justify-content: space-around;

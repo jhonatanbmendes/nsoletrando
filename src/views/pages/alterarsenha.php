@@ -1,6 +1,6 @@
 <?php $render('header',['css'=> 'alterarSenha']); ?>
 
-<!-- Opa, <?=$nome;?> - Alterar Senha
+<!-- Opa, <?=$nome;?> - Alterar Senha 
 
 </br><a href="<?=$base;?>/">Voltar</a> -->
 
@@ -11,6 +11,11 @@
 </nav>
 
 <div id="titulo">Alterar Senha</div>
+<div id="alerta">
+    <?php if(!empty($flash)): ?>
+        <?php echo $flash; ?>
+    <?php endif; ?>
+</div>
 <section id="senha">
     <section id="perfil">
         <div id="imagem"><img src="<?=$base;?>/img/avatar/<?=$pessoa->avatar;?>" alt="Avatar" class="avatar"></div>

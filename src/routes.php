@@ -24,9 +24,9 @@ $router->get('/resultado', 'PalavraController@resultado');
 $router->get('/perfil', 'PessoaController@perfil');
 $router->get('/rankingindividual', 'PessoaController@rankingIndividual');
 $router->get('/alteraravatar', 'PessoaController@alterarAvatar');
-// $router->post('/alteraravatar', 'PessoaController@alterarAvatarAction');
+$router->get('/alteraravatar/{id}', 'PessoaController@updateAvatar');
 $router->get('/alterarsenha', 'PessoaController@alterarSenha');
-// $router->post('/alterarsenha', 'PessoaController@alterarSenhaAction');
+$router->post('/alterarsenha', 'PessoaController@alterarSenhaAction');
 
 //PROFESSOR
 $router->get('/professor', 'ProfessorHomeController@index');

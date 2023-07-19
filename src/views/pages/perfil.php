@@ -15,8 +15,8 @@
     <div></div>
 </section>
 <section id="alterar">
-    <div><a href="<?=$base;?>/alterarSenha">Alterar Senha</a></div>
-    <div><a href="<?=$base;?>/alterarAvatar">Alterar Avatar</a></div>
+    <div><a href="<?=$base;?>/alterarsenha">Alterar Senha</a></div>
+    <div><a href="<?=$base;?>/alteraravatar">Alterar Avatar</a></div>
 </section>
 
 <?php $render('footer'); ?>

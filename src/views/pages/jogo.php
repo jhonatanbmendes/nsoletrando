@@ -13,11 +13,11 @@
 <form action="" method="post" name="palavra">
     <div class="palavra">Aperte Play para Ouvir a Palavra</div>
     <audio controls>
-        <source src="<?=$base;?>/media/<?=$palavra->palavra?>" type="audio/mpeg">
+        <source src="<?=$base;?>/media/<?=$palavra->arquivo;?>" type="audio/mpeg">
     </audio>
     <div class="frase">Soletre a Palavra nos Campos Abaixo</div>
     <section>
-        <input name="id" value="<?=$palavra->id?>" hidden>
+        <input name="id" value="<?=$palavra->id;?>" hidden>
         <input type="text" maxlength="1" name="campo1" onkeyUp="javascript:jumpto('campo1','campo2')" class="letra" autocomplete="off" required>
         <input type="text" maxlength="1" name="campo2" onkeyUp="javascript:jumpto('campo2','campo3')" class="letra" autocomplete="off" required>
         <input type="text" maxlength="1" name="campo3" onkeyUp="javascript:jumpto('campo3','campo4')" class="letra" autocomplete="off">

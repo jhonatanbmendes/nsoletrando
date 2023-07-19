@@ -19,7 +19,7 @@ $router->get('/escolheravatar/{id}', 'LoginController@escolheravatar');
 
 
 $router->get('/jogo', 'PalavraController@jogo');
-// $router->post('/jogo', 'PalavraController@jogoAction');
+$router->post('/jogo', 'PalavraController@jogoAction');
 $router->get('/resultado', 'PalavraController@resultado');
 $router->get('/perfil', 'PessoaController@perfil');
 $router->get('/rankingindividual', 'PessoaController@rankingIndividual');

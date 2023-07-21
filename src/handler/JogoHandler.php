@@ -20,8 +20,20 @@ class JogoHandler {
         return $dados['ano'];
     }
 
-    public static function getPalavras($ano){
-        $dados = Palavra::select()->where('serie_ano', $ano)->get();
+    public static function getPalavras($ano, $remove){
+        if($remove === ''){
+            if($ano == 1){
+                $dados = Palavra::select()->where('serie_ano', $ano)->get();
+            }else{
+                $dados = Palavra::select()->where('serie_ano', 'in', [$ano, $ano-1])->get();
+            }
+        }else{
+            if($ano == 1){
+                $dados = Palavra::select()->where('serie_ano', $ano)->whereNotIn('id', $remove)->get();
+            }else{
+                $dados = Palavra::select()->where('serie_ano', 'in', [$ano, $ano-1])->whereNotIn('id', $remove)->get();
+            }
+        }
         
         $palavras = [];
         foreach($dados as $dadosItem){
@@ -67,6 +79,7 @@ class JogoHandler {
         }
         return $emoji;
     }
+
 
 
 

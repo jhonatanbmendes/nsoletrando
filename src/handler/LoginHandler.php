@@ -6,6 +6,7 @@ use \src\models\Perfil;
 use \src\models\Serie;
 use \src\models\Login;
 use \src\models\Avatar;
+use \src\models\Contagem;
 
 class LoginHandler {
 
@@ -131,6 +132,14 @@ class LoginHandler {
             'senha' => $senha,
             'id_pessoa' => $idPessoa['id']
             ])->execute();
+
+        date_default_timezone_set('America/Manaus');
+        $data = Date("Y-m-d", time());
+        
+        Contagem::insert([
+            'data' => $data,
+            'id_pessoa' => $idPessoa['id'],
+        ])->execute();
             
 
         return $token;

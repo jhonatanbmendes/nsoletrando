@@ -6,7 +6,7 @@
         <?php echo $flash; ?>
     <?php endif; ?>
 </div>
-<form action="<?=$base?>/administrador/cadastrar" method="post">
+<form action="<?=$base;?>/administrador/cadastrar" method="post">
     <input name="nome" type="text" placeholder="Digite o nome" autocomplete="off">
     <input name="dataNascimento" type="text" placeholder="Digite a Data de Nascimento" id="nascimento">
     <button id="botao">Cadastrar</button>

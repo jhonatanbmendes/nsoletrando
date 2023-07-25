@@ -1,9 +1,5 @@
 <?php $render('header',['css'=> 'alterarSenha']); ?>
 
-<!-- Opa, <?=$nome;?> - Alterar Senha 
-
-</br><a href="<?=$base;?>/">Voltar</a> -->
-
 <nav>
     <div><a href="<?=$base;?>/">Início</a></div>
     <div><a href="<?=$base;?>/jogo">Jogar</a></div>

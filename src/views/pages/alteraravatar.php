@@ -1,9 +1,5 @@
 <?php $render('header',['css'=> 'alterarAvatar']); ?>
 
-<!-- Opa, <?=$nome;?> - Alterar Avatar
-
-</br><a href="<?=$base;?>/">Voltar</a> -->
-
 <div id="titulo">Escolha seu Avatar</div>
 
 <section>

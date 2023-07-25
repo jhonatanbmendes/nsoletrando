@@ -16,7 +16,7 @@
 <section class="item">
     <div class="nome">
         <div class="imagem"><img class="avatar" src="<?=$base;?>/img/avatar/<?=$gestorItem->avatar;?>" alt="avatar"></div>
-        <div class="apelido"><?=$gestorItem->nome?></div>
+        <div class="apelido"><?=$gestorItem->nome;?></div>
     </div>
     <div class="pontos"><a href="#">Inativar</a></div>
 </section>

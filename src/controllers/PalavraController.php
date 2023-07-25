@@ -14,7 +14,7 @@ class PalavraController extends Controller {
     private $usuarioLogado;
 
     public function __construct(){
-        $this->$usuarioLogado = LoginHandler::checkLogin();
+        $this->usuarioLogado = LoginHandler::checkLogin();
         if(LoginHandler::checkLogin() === false){
             $this->redirect('/login');
         }
@@ -28,7 +28,7 @@ class PalavraController extends Controller {
         date_default_timezone_set('America/Manaus');
         $dataAtual = Date("Y-m-d", time());
 
-        $contagem = Contagem::select()->where('id_pessoa', $this->$usuarioLogado->id)->one();
+        $contagem = Contagem::select()->where('id_pessoa', $this->usuarioLogado->id)->one();
         if($contagem['usadas'] != null){
             $usadas = explode(',',$contagem['usadas']);
         }else{
@@ -42,11 +42,11 @@ class PalavraController extends Controller {
         }else{
             Contagem::update()
                 ->set(['data' => $dataAtual, 'jogadas' => 0, 'usadas' => ''])
-                ->where('id_pessoa', $this->$usuarioLogado->id)
+                ->where('id_pessoa', $this->usuarioLogado->id)
             ->execute();
         }
 
-        $ano = JogoHandler::getAno($this->$usuarioLogado->id);
+        $ano = JogoHandler::getAno($this->usuarioLogado->id);
         $palavra = JogoHandler::getPalavras($ano,$usadas);
         $indice = array_rand($palavra, 1);
 
@@ -92,29 +92,29 @@ class PalavraController extends Controller {
                 'resultado' => 'acertou',
                 'data' => $dataTempo,
                 'id_palavra' => $id,
-                'id_pessoa' => $this->$usuarioLogado->id
+                'id_pessoa' => $this->usuarioLogado->id
             ])->execute();
 
-            $soma = Pessoa::select()->where('id',$this->$usuarioLogado->id)->one();
+            $soma = Pessoa::select()->where('id',$this->usuarioLogado->id)->one();
 
             Pessoa::update()
                 ->set('acerto',$soma['acerto'] + 1)
-                ->where('id',$this->$usuarioLogado->id)
+                ->where('id',$this->usuarioLogado->id)
             ->execute();
 
-            $contagem = Contagem::select()->where('id_pessoa', $this->$usuarioLogado->id)->one();
+            $contagem = Contagem::select()->where('id_pessoa', $this->usuarioLogado->id)->one();
             if($contagem['usadas'] == null){
                 Contagem::update()
                 ->set(['usadas' => $resposta['id']])
-                ->where('id_pessoa', $this->$usuarioLogado->id)
+                ->where('id_pessoa', $this->usuarioLogado->id)
             ->execute();
             }else{
                 Contagem::update()
                 ->set(['usadas' => $contagem['usadas'].','.$resposta['id']])
-                ->where('id_pessoa', $this->$usuarioLogado->id)
+                ->where('id_pessoa', $this->usuarioLogado->id)
             ->execute();
             }
-            Contagem::update()->set(['jogadas' => intval($contagem['jogadas'])+1])->where('id_pessoa', $this->$usuarioLogado->id)->execute();
+            Contagem::update()->set(['jogadas' => intval($contagem['jogadas'])+1])->where('id_pessoa', $this->usuarioLogado->id)->execute();
             
             $this->render('resultado',['escrita'=>$palavra,'resposta'=>$resposta['palavra'], 'correto' => 'sim', 'emoji' => $emojiFeliz[$auxFeliz]]);
         }else{
@@ -124,29 +124,29 @@ class PalavraController extends Controller {
                 'palavra_escrita' => $palavra,
                 'data' => $dataTempo,
                 'id_palavra' => $id,
-                'id_pessoa' => $this->$usuarioLogado->id
+                'id_pessoa' => $this->usuarioLogado->id
             ])->execute();
 
-            $soma = Pessoa::select()->where('id',$this->$usuarioLogado->id)->one();
+            $soma = Pessoa::select()->where('id',$this->usuarioLogado->id)->one();
 
             Pessoa::update()
                 ->set('erro',$soma['erro'] + 1)
-                ->where('id',$this->$usuarioLogado->id)
+                ->where('id',$this->usuarioLogado->id)
             ->execute();
 
-            $contagem = Contagem::select()->where('id_pessoa', $this->$usuarioLogado->id)->one();
+            $contagem = Contagem::select()->where('id_pessoa', $this->usuarioLogado->id)->one();
             if($contagem['usadas'] == null){
                 Contagem::update()
                 ->set(['usadas' => $resposta['id']])
-                ->where('id_pessoa', $this->$usuarioLogado->id)
+                ->where('id_pessoa', $this->usuarioLogado->id)
             ->execute();
             }else{
                 Contagem::update()
                 ->set(['usadas' => $contagem['usadas'].','.$resposta['id']])
-                ->where('id_pessoa', $this->$usuarioLogado->id)
+                ->where('id_pessoa', $this->usuarioLogado->id)
             ->execute();
             }
-            Contagem::update()->set(['jogadas' => intval($contagem['jogadas'])+1])->where('id_pessoa', $this->$usuarioLogado->id)->execute();
+            Contagem::update()->set(['jogadas' => intval($contagem['jogadas'])+1])->where('id_pessoa', $this->usuarioLogado->id)->execute();
 
             $this->render('resultado',['escrita'=>$palavra,'resposta'=>$resposta['palavra'], 'correto' => 'não', 'emoji' => $emojiTriste[$auxTriste]]);
         }
@@ -157,7 +157,7 @@ class PalavraController extends Controller {
     }
 
     public function jogoEsgotado(){
-        $this->render('esgotado', ['pessoa'=> $this->$usuarioLogado]);
+        $this->render('esgotado', ['pessoa'=> $this->usuarioLogado]);
     }
 
 

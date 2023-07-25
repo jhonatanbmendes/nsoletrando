@@ -1,9 +1,5 @@
 <?php $render('header',['css'=> 'jogo']); ?>
 
-<!-- Opa, <?=$nome;?> - Jogo
-
-</br><a href="<?=$base;?>/">Voltar</a> -->
-
 <nav>
     <div><a href="<?=$base;?>/">Início</a></div>
     <div><a href="<?=$base;?>/rankingindividual">Meu Ranking</a></div>

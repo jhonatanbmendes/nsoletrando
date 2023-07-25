@@ -10,14 +10,14 @@ class PessoaController extends Controller {
     private $usuarioLogado;
 
     public function __construct(){
-        $this->$usuarioLogado = LoginHandler::checkLogin();
+        $this->usuarioLogado = LoginHandler::checkLogin();
         if(LoginHandler::checkLogin() === false){
             $this->redirect('/login');
         }
     }
 
     public function perfil(){
-        $this->render('perfil', ['pessoa'=> $this->$usuarioLogado]);
+        $this->render('perfil', ['pessoa'=> $this->usuarioLogado]);
     }
 
     public function alterarAvatar(){
@@ -37,7 +37,7 @@ class PessoaController extends Controller {
 
     public function rankingIndividual(){
         
-        $this->render('rankingindividual', ['pessoa'=> $this->$usuarioLogado]);
+        $this->render('rankingindividual', ['pessoa'=> $this->usuarioLogado]);
     }
     
     public function alterarSenha(){
@@ -47,7 +47,7 @@ class PessoaController extends Controller {
             $_SESSION['flash'] = '';
         }
 
-        $this->render('alterarsenha', ['flash' => $flash, 'pessoa'=> $this->$usuarioLogado]);
+        $this->render('alterarsenha', ['flash' => $flash, 'pessoa'=> $this->usuarioLogado]);
     }
 
     public function alterarSenhaAction(){
@@ -57,8 +57,8 @@ class PessoaController extends Controller {
         if($senha1 && $senha2){
             if($senha1 === $senha2){
                 echo $senha1;
-                echo " - id: ".$this->$usuarioLogado->id;
-                $resultado = AlunoHandler::atualizaSenha($senha1, $this->$usuarioLogado->id);
+                echo " - id: ".$this->usuarioLogado->id;
+                $resultado = AlunoHandler::atualizaSenha($senha1, $this->usuarioLogado->id);
                 if($resultado == true){
                     $this->redirect('/perfil');
                 }

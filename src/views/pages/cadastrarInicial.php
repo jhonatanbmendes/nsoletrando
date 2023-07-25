@@ -1,9 +1,5 @@
 <?php $render('headerExterno',['css'=> 'externo']); ?>
 
-<!-- Opa, <?=$nome;?> - Cadastrar
-
-</br><a href="<?=$base;?>/">Voltar</a> -->
-
 <div id="titulo">Cadastro de Aluno</div>
 <div id="alerta">
     <?php if(!empty($flash)): ?>
@@ -18,12 +14,6 @@
             <option value="<?= $perfilItem->id;?>"><?=$perfilItem->nome;?></option>
         <?php endforeach; ?>
         </select>
-        <!-- <select name="ano">
-            <option value="">Selecione o ano</option>
-            <?php foreach($ano as $anoItem): ?>
-                <option value="<?= $anoItem;?>"><?= $anoItem;?>º ano</option>
-                <?php endforeach; ?>
-            </select> -->
             <select name="turma">
                 <option value="">Selecione a turma</option>
                 <?php foreach($serie as $serieItem): ?>

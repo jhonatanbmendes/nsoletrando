@@ -10,7 +10,7 @@ class HomeController extends Controller {
     private $usuarioLogado;
 
     public function __construct(){
-        $this->$usuarioLogado = LoginHandler::checkLogin();
+        $this->usuarioLogado = LoginHandler::checkLogin();
         if(LoginHandler::checkLogin() === false){
             $this->redirect('/login');
         }

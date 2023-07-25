@@ -1,9 +1,5 @@
 <?php $render('headerExterno',['css'=> 'externo']); ?>
 
-<!-- Opa, <?=$nome;?> - Resetar Senha
-
-</br><a href="<?=$base;?>/">Voltar</a> -->
-
 <div id="titulo">Resetar Senha</div>
 <div id="alerta">
 <?php if(!empty($flash)): ?>

@@ -19,9 +19,9 @@
 <?php foreach($precadastro as $precadastroItem):?>
 <section class="item">
     <div class="nome">
-        <div class="apelido"><?=$precadastroItem->nome?> - <?=$precadastroItem->chave?></div>
+        <div class="apelido"><?=$precadastroItem->nome;?> - <?=$precadastroItem->chave;?></div>
     </div>
-    <div class="pontos"><a href="<?=$base;?>/gestor/inativarprecadastro/<?=$precadastroItem->id;?>"><?=$precadastroItem->status?></a></div>
+    <div class="pontos"><a href="<?=$base;?>/gestor/inativarprecadastro/<?=$precadastroItem->id;?>"><?=$precadastroItem->status;?></a></div>
 </section>
 <?php endforeach;?>
 <?php endif;?>

@@ -11,11 +11,11 @@ class ProfessorHomeController extends Controller {
     private $usuarioLogado;
 
     public function __construct(){
-        $this->$usuarioLogado = LoginHandler::checkLogin();
+        $this->usuarioLogado = LoginHandler::checkLogin();
         if(LoginHandler::checkLogin() === false){
             $this->redirect('/login');
         }
-        $pessoa = Pessoa::select()->where('id', $this->$usuarioLogado->id)->one();
+        $pessoa = Pessoa::select()->where('id', $this->usuarioLogado->id)->one();
         $perfil = Perfil::select()->where('id', $pessoa['id_perfil'])->one();
 
         if($perfil['nome'] !== 'professor'){
@@ -25,7 +25,7 @@ class ProfessorHomeController extends Controller {
     }
 
     public function index() {
-        $this->render('professor/home', ['pessoa' => $this->$usuarioLogado]);
+        $this->render('professor/home', ['pessoa' => $this->usuarioLogado]);
     }
 
     public function sobre() {

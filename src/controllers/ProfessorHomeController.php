@@ -3,6 +3,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handler\LoginHandler;
+use \src\handler\ProfessorHandler;
 use \src\models\Pessoa;
 use \src\models\Perfil;
 
@@ -25,7 +26,10 @@ class ProfessorHomeController extends Controller {
     }
 
     public function index() {
-        $this->render('professor/home', ['pessoa' => $this->usuarioLogado]);
+
+        $pessoa = ProfessorHandler::getAlunoTurma($this->usuarioLogado->turma);
+
+        $this->render('professor/home', ['pessoa' => $pessoa]);
     }
 
     public function sobre() {

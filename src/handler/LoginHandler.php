@@ -25,6 +25,7 @@ class LoginHandler {
                 // $usuarioLogado->nome = $nomeUsuario[0];
                 $usuarioLogado->nome = $data['nome'];
                 $usuarioLogado->acerto = $data['acerto'];
+                $usuarioLogado->turma = $data['id_serie'];
 
                 $avatar = Avatar::select()->where('id', $data['id_avatar'])->one();
 

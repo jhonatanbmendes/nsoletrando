@@ -252,7 +252,7 @@ class LoginController extends Controller {
 
         }
         
-        $this->redirect('/');
+        $this->redirect('/login');
     }
 
 

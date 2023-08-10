@@ -29,4 +29,15 @@
     <div><a href="<?=$base;?>/gestor">Início</a></div>
 </div>
 
+<script src="https://unpkg.com/imask"></script>
+<script>
+    IMask(
+        document.getElementById('nascimento'),
+        {
+            mask:'00/00/0000'
+        }
+    )
+
+</script>
+
 <?php $render('footer'); ?>
